@@ -4,20 +4,22 @@ spring:
   cloud:
     loadbalancer:
       ribbon:
-        enabled: false
+        enabled: true
     gateway:
       discovery:
         locator:
           enabled: true
       routes:
         - id: GBFRouter
-          uri: http://localhost:8090
+#          uri: http://localhost:8090
+          uri: lb://GBF
           predicates:
             - Path=/GBF/**
           filters:
             - StripPrefix=1
         - id: TOKEN
-          uri: http://localhost:8087
+#          uri: http://localhost:8087
+          uri: lb://TOKEN
           predicates:
             - Path=/TOKEN/**
           filters:
